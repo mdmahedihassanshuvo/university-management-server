@@ -1,35 +1,35 @@
-import { Request, Response } from 'express';
-import { studentServices } from './student.service';
-// import studentJoiSchema from './student.joiValidation';
+import { NextFunction, Request, Response } from "express";
+import { studentServices } from "./student.service";
+import sendRespoonse from "../../utils/sendResponse";
+import httpStatus from "http-status";
 
-
-
-const getStudents = async (req: Request, res: Response) => {
+const getStudents = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await studentServices.getAllStudentFromDB();
 
-    //send response
-    res.status(200).json({
+    sendRespoonse(res, {
+      statusCode: httpStatus.OK,
       success: true,
-      message: 'Student data get successfully',
+      message: "Student created successfully",
       data: result,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
-const getStudent = async (req: Request, res: Response) => {
+const getStudent = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { studentId } = req.params;
     const result = await studentServices.getOneStudentFromDB(studentId);
-    res.status(200).json({
+    sendRespoonse(res, {
+      statusCode: httpStatus.OK,
       success: true,
-      message: 'Student data get successfully',
+      message: "Student created successfully",
       data: result,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
