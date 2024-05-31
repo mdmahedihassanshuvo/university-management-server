@@ -5,6 +5,7 @@ import {
   TStudent,
   TStudentName,
 } from "./student.interface";
+import { date } from "zod";
 
 // 2. Create a Schema corresponding to the document interface.
 export const userNameSchema = new Schema<TStudentName>(
@@ -136,7 +137,7 @@ export const studentSchema = new Schema<TStudent>({
     required: [true, "Age is required"],
   },
   dateOfBirth: {
-    type: String,
+    type: Date,
     trim: true,
     required: [true, "Date of Birth is required"],
   },
