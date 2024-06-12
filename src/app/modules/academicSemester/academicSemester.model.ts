@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import { Schema, model } from "mongoose";
 import { TAcademicSemester } from "./acdemicSemester.interface";
-import { AcademicSemesterCode, AcademicSemesterName, Months } from "./academicSemester.constant";
-
-
-
+import {
+  AcademicSemesterCode,
+  AcademicSemesterName,
+  Months,
+} from "./academicSemester.constant";
 
 const academicSemesterSchema = new Schema<TAcademicSemester>(
   {
@@ -18,7 +21,7 @@ const academicSemesterSchema = new Schema<TAcademicSemester>(
       enum: AcademicSemesterCode,
     },
     year: {
-      type: Date,
+      type: String,
       required: true,
     },
     startMonth: {
@@ -36,6 +39,17 @@ const academicSemesterSchema = new Schema<TAcademicSemester>(
     timestamps: true,
   }
 );
+
+academicSemesterSchema.pre("save", async function (next) {
+  const isSemesterExist = await AcademinSemester.findOne({
+    name: this.name,
+    year: this.year,
+  });
+
+  if (isSemesterExist) {
+    throw new Error("Academic Semester already exist");
+  }
+});
 
 export const AcademinSemester = model<TAcademicSemester>(
   "AcademicSemester",

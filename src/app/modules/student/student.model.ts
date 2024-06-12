@@ -5,7 +5,6 @@ import {
   TStudent,
   TStudentName,
 } from "./student.interface";
-import { date } from "zod";
 
 // 2. Create a Schema corresponding to the document interface.
 export const userNameSchema = new Schema<TStudentName>(
@@ -34,79 +33,83 @@ export const userNameSchema = new Schema<TStudentName>(
   }
 );
 
-export const guardianSchema = new Schema<TGuardian>({
-  fatherName: {
-    type: String,
-    trim: true,
-    required: [true, "Please provide the father's name"],
+export const guardianSchema = new Schema<TGuardian>(
+  {
+    fatherName: {
+      type: String,
+      trim: true,
+      required: [true, "Please provide the father's name"],
+    },
+    fatherContactNo: {
+      type: String,
+      trim: true,
+      required: [true, "Please provide the father's contact number"],
+    },
+    fatherOccupation: {
+      type: String,
+      trim: true,
+      required: [true, "Please provide the father's occupation"],
+    },
+    motherName: {
+      type: String,
+      trim: true,
+      required: [true, "Please provide the mother's name"],
+    },
+    motherContactNo: {
+      type: String,
+      trim: true,
+      required: [true, "Please provide the mother's contact number"],
+    },
+    motherOccupation: {
+      type: String,
+      trim: true,
+      required: [true, "Please provide the mother's occupation"],
+    },
   },
-  fatherContactNo: {
-    type: String,
-    trim: true,
-    required: [true, "Please provide the father's contact number"],
-  },
-  fatherOccupation: {
-    type: String,
-    trim: true,
-    required: [true, "Please provide the father's occupation"],
-  },
-  motherName: {
-    type: String,
-    trim: true,
-    required: [true, "Please provide the mother's name"],
-  },
-  motherContactNo: {
-    type: String,
-    trim: true,
-    required: [true, "Please provide the mother's contact number"],
-  },
-  motherOccupation: {
-    type: String,
-    trim: true,
-    required: [true, "Please provide the mother's occupation"],
-  },
-},
-{
-  _id: false,
-});
+  {
+    _id: false,
+  }
+);
 
-export const localGuardianSchema = new Schema<TLocalGuardian>({
-  name: {
-    type: String,
-    trim: true,
-    required: [
-      true,
-      "Name is required. Please provide the name of the local guardian.",
-    ],
+export const localGuardianSchema = new Schema<TLocalGuardian>(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: [
+        true,
+        "Name is required. Please provide the name of the local guardian.",
+      ],
+    },
+    contactNo: {
+      type: String,
+      trim: true,
+      required: [
+        true,
+        "Contact number is required. Please provide the contact number of the local guardian.",
+      ],
+    },
+    occupation: {
+      type: String,
+      trim: true,
+      required: [
+        true,
+        "Occupation is required. Please provide the occupation of the local guardian.",
+      ],
+    },
+    address: {
+      type: String,
+      trim: true,
+      required: [
+        true,
+        "Address is required. Please provide the address of the local guardian.",
+      ],
+    },
   },
-  contactNo: {
-    type: String,
-    trim: true,
-    required: [
-      true,
-      "Contact number is required. Please provide the contact number of the local guardian.",
-    ],
-  },
-  occupation: {
-    type: String,
-    trim: true,
-    required: [
-      true,
-      "Occupation is required. Please provide the occupation of the local guardian.",
-    ],
-  },
-  address: {
-    type: String,
-    trim: true,
-    required: [
-      true,
-      "Address is required. Please provide the address of the local guardian.",
-    ],
-  },
-},
-{
-  _id: false,
-});
+  {
+    _id: false,
+  }
+);
 
 export const studentSchema = new Schema<TStudent>({
   id: {
@@ -137,7 +140,7 @@ export const studentSchema = new Schema<TStudent>({
     required: [true, "Age is required"],
   },
   dateOfBirth: {
-    type: Date,
+    type: String,
     trim: true,
     required: [true, "Date of Birth is required"],
   },
@@ -186,6 +189,9 @@ export const studentSchema = new Schema<TStudent>({
   profileImg: {
     type: String,
     trim: true,
+  },
+  admissionSemester: {
+    type: Schema.Types.ObjectId,
   },
   isDeleted: {
     type: Boolean,

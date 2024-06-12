@@ -62,7 +62,7 @@ const createStudentValidationSchema = z.object({
         .enum(["male", "female"], { message: "{VALUE} is not a valid gender" })
         .refine((value) => value.length > 0, { message: "Gender is required" }),
       age: z.number(),
-      dateOfBirth: z.date().optional(),
+      dateOfBirth: z.string().optional(),
       email: z.string().email({ message: "{VALUE} is not a valid email" }),
       contactNo: z.string(),
       bloodGroup: z
@@ -78,6 +78,7 @@ const createStudentValidationSchema = z.object({
         .min(1, { message: "Permanent Address is required" }),
       guardian: guardianValidationSchema,
       localGuardian: localGuardianValidationSchema,
+      admissionSemester: z.string(),
       profileImg: z.string().optional(),
     }),
   }),
