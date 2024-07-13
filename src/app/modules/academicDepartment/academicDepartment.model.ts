@@ -8,6 +8,7 @@ export const academicDepartmentSchema = new Schema<TAcademicDepartment>(
     name: {
       type: String,
       unique: true,
+      required: true,
     },
     academicFaculty: {
       type: Schema.Types.ObjectId,
