@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 import { studentServices } from "./student.service";
 import sendRespoonse from "../../utils/sendResponse";
@@ -11,7 +12,7 @@ const getStudents = catchAsync(async (req, res, next) => {
   sendRespoonse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Student created successfully",
+    message: "Get All Student successfully",
     data: result,
   });
 });
@@ -23,7 +24,18 @@ const getStudent = catchAsync(async (req, res, next) => {
   sendRespoonse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Student created successfully",
+    message: "Get Student successfully",
+    data: result,
+  });
+});
+
+const deleteStudent = catchAsync(async (req, res, next) => {
+  const { studentId } = req.params;
+  const result = await studentServices.deleteStudentFromDB(studentId);
+  sendRespoonse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Delete Student successfully",
     data: result,
   });
 });
@@ -31,4 +43,5 @@ const getStudent = catchAsync(async (req, res, next) => {
 export const studentController = {
   getStudents,
   getStudent,
+  deleteStudent,
 };

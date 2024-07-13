@@ -5,6 +5,8 @@ import {
   TStudent,
   TStudentName,
 } from "./student.interface";
+import AppError from "../../error/appError";
+import httpStatus from "http-status";
 
 // 2. Create a Schema corresponding to the document interface.
 export const userNameSchema = new Schema<TStudentName>(
@@ -190,8 +192,13 @@ export const studentSchema = new Schema<TStudent>({
     type: String,
     trim: true,
   },
+  academicDepartment: {
+    type: Schema.Types.ObjectId,
+    ref: "AcademicDepartment",
+  },
   admissionSemester: {
     type: Schema.Types.ObjectId,
+    ref: "AcademicSemester",
   },
   isDeleted: {
     type: Boolean,

@@ -1,10 +1,11 @@
+import AppError from "../../error/appError";
 import { semesterNameCodeMapper } from "./academicSemester.constant";
 import { AcademinSemester } from "./academicSemester.model";
 import { TAcademicSemester } from "./acdemicSemester.interface";
 
 const createAcademicSemesterIntoDB = async (payload: TAcademicSemester) => {
   if (semesterNameCodeMapper[payload.name] !== payload.code) {
-    throw new Error("Academic Semester Name and Code are not matching");
+    throw new AppError(404,"Academic Semester Name and Code are not matching");
   }
 
   const result = await AcademinSemester.create(payload);
