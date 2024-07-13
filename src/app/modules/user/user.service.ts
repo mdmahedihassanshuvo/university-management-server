@@ -6,7 +6,7 @@ import { Student } from "../student/student.model";
 import { AcademinSemester } from "../academicSemester/academicSemester.model";
 import { generateStudentId } from "./user.utils";
 import mongoose from "mongoose";
-import AppError from "../../error/appError";
+import AppError from "../../errors/appError";
 import httpStatus from "http-status";
 
 const createStudentIntoDB = async (password: string, payload: TStudent) => {

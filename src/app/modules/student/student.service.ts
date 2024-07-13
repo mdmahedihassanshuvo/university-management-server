@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { Student } from "./student.model";
-import AppError from "../../error/appError";
+import AppError from "../../errors/appError";
 import httpStatus from "http-status";
 import { User } from "../user/user.model";
 import { TStudent } from "./student.interface";
