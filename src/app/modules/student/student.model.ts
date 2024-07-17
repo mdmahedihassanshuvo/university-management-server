@@ -5,8 +5,6 @@ import {
   TStudent,
   TStudentName,
 } from "./student.interface";
-import AppError from "../../errors/appError";
-import httpStatus from "http-status";
 
 // 2. Create a Schema corresponding to the document interface.
 export const userNameSchema = new Schema<TStudentName>(

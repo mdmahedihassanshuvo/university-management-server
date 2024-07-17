@@ -8,12 +8,19 @@ import { studentRouter } from "./app/modules/student/student.route";
 import gloabalErrorHandler from "./app/middleware/globalErrorHandler";
 import notFound from "./app/middleware/notFound";
 import router from "./app/routes";
+import { promise } from "zod";
 const app: Application = express();
 
 //parser .....
 app.use(express.json());
 app.use(cors());
 app.use(express.text());
+
+// const test= async (req : Request, res: Response) =>{
+//   Promise.reject();
+// }
+
+// app.get("/", test)
 
 app.use("/api", router);
 app.get("/", (req, res) => {

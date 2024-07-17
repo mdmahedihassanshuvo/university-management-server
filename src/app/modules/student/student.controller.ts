@@ -7,7 +7,8 @@ import catchAsync from "../../utils/catchAsync";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getStudents = catchAsync(async (req, res, next) => {
-  const result = await studentServices.getAllStudentFromDB();
+  const query = req.query;
+  const result = await studentServices.getAllStudentFromDB(query);
 
   sendRespoonse(res, {
     statusCode: httpStatus.OK,
@@ -31,7 +32,7 @@ const getStudent = catchAsync(async (req, res, next) => {
 
 const updateStudent = catchAsync(async (req, res, next) => {
   const { studentId } = req.params;
-  const {student} = req.body
+  const { student } = req.body;
   const result = await studentServices.updateStudentIntoDB(studentId, student);
   sendRespoonse(res, {
     statusCode: httpStatus.OK,
@@ -40,7 +41,6 @@ const updateStudent = catchAsync(async (req, res, next) => {
     data: result,
   });
 });
-
 
 const deleteStudent = catchAsync(async (req, res, next) => {
   const { studentId } = req.params;
